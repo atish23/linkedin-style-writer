@@ -27,8 +27,17 @@ When writing a technical post for LinkedIn, you must strictly adhere to the foll
   - **Solution / The Core Mechanic**: Introduce the solution and break down how it works step-by-step.
 - **Bullet-Heavy Explanations**:
   - Use clean bullet lists (`•` or emojis like `🧠`, `⚡`, `🛡️`, `🎯`) for features, workflows, and use cases.
-- **CTA Pattern (Call to Action)**:
-  - Close with a grounded question for discussion (e.g., "What is the most frustrating thing about X in your team right now? Let's talk in the comments 👇").
+- **NEVER Include ASCII Box Diagrams in Post Text (STRICT)**:
+  - NEVER insert ASCII flowcharts, box-and-arrow diagrams (e.g., `[ Prompt ] -> │ ▼ [ Hook ] -> [ LLM ]`), or text trees into the LinkedIn post body.
+  - In LinkedIn feeds, ASCII box art breaks across mobile screen widths, suffers from variable font kerning, and looks cluttered.
+  - All architecture workflows, pipelines, and step-by-step system interactions must be rendered into the companion programmatic graphic or animated GIF instead. Keep post text clean, bullet-focused, and narrative-first.
+- **Ending & Closing Rules (No Engagement Bait - STRICT)**:
+  - NEVER end posts with generic engagement-bait questions such as: "Let's discuss in the comments 👇", "What do you think? Drop a comment below", or "How are you handling X in your workflows?".
+  - These lines feel like generic marketing slop and dilute technical credibility.
+  - Instead, end decisively on:
+    1. A sharp technical takeaway or architecture principle.
+    2. A concrete CLI command, resource, or GitHub repository link.
+    3. Stop as soon as the technical thought is complete with zero synthetic throat-clearing.
 
 ## 3. LinkedIn Native Formatting (No Raw Markdown Asterisks)
 - **The Formatting Constraint**: LinkedIn post inputs do not support native Markdown (`**bold**` or `### Header`). Raw Markdown renders as literal syntax asterisks.
@@ -37,25 +46,19 @@ When writing a technical post for LinkedIn, you must strictly adhere to the foll
   - When text is pasted into LinkedIn, its sanitizer strips empty newlines and collapses paragraphs into a dense wall of text.
   - **The Solution**: Inject the invisible **Braille Pattern Blank character (`\u2800` / `⠀`)** onto every empty spacer line between paragraphs. LinkedIn recognizes `⠀` as a real character and will NEVER strip or collapse the spacing on desktop or mobile.
 
-## 4. Programmatic Matte-Black Developer Graphics
-- **No Generic AI Illustrations**: NEVER generate cartoonish, glossy, or uncanny AI illustrations. The image MUST look like a clean, human-designed developer artifact (Linear/Vercel aesthetic).
-- **Generation Method**: Generate the image programmatically using Python (Pillow) with system fonts (San Francisco, Helvetica, Arial, or Menlo monospace) via the provided script `scripts/generate_infographic.py`.
-- **Canvas & Theme**:
-  - **Resolution**: 1200x1200 high-resolution square (1:1 aspect ratio, optimal for LinkedIn feeds).
-  - **Background**: Deep matte black (`#050505`) with a subtle frame border (`#161616`).
-  - **Typography & Mobile Readability Scale**:
-    - Main Titles: 42px to 46px bold.
-    - Card Headings: 24px to 26px bold.
-    - Body Bullets: 20px to 22px minimum.
-    - Terminal Code: 18px to 20px monospace.
-  - **Layout**:
-    - Top metadata pill badge + repo tag + bold title + 1-line subtitle.
-    - 2-to-3 horizontal stacked cards with hand-drawn vector checkmarks (`✓` in `#2ecc71`) or crosses (`✕` in `#ff4d4d`).
-    - Bottom row: macOS terminal card with colored window dots + practitioner takeaway quote box.
+## 4. Programmatic Visual Assets (Matte-Black Developer Theme)
+- **No Generic AI Illustrations**: NEVER generate cartoonish, glossy, or uncanny AI illustrations. Visual assets MUST look like clean, human-designed developer artifacts (Linear/Vercel aesthetic).
+- **Format Choices**:
+  1. **Developer Cheat Sheet Graphic (`.jpg`)**: 1200x1200 high-resolution square (1:1 aspect ratio), deep matte black (`#050505`), stark white headers (42px-46px bold), body bullets (20px-22px), and coordinate-drawn vector checkmarks (`✓` in `#2ecc71`) or crosses (`✕` in `#ff4d4d`).
+  2. **Sequential Animated GIF (`.gif`)**: Multi-frame looping GIF (1000x1000 or 1200x1200, 150-250KB) showing step-by-step CLI workflows, terminal hooks, or agent pipeline stages in action.
+- **Generation Method**: Generated programmatically using Python (Pillow) with system fonts (San Francisco, Helvetica, Arial, or Menlo monospace).
 
-## 5. Output Deliverables
-Whenever drafting a post, provide:
-1. Canonical source draft saved as a `.md` file in `./output/linkedin_posts/`.
-2. LinkedIn-ready text file (`_linkedin_ready.txt`) processed via `scripts/md_to_linkedin.py` with full Unicode bold and `U+2800` line spacing.
-3. High-resolution 1200x1200 developer graphic (`.jpg`) rendered via `scripts/generate_infographic.py`.
-4. In the chat response, always output the direct-paste text block so the user can copy it straight into LinkedIn.
+## 5. Output Deliverables & Folder Structure
+Whenever drafting a post, organize deliverables into a dedicated timestamped topic bundle:
+- **Topic Folder Path**: `./output/linkedin_posts/YYYY-MM-DD_HHMM_<topic_slug>/`
+- **Inside the Topic Folder**:
+  1. `<topic_slug>_post.md`: Canonical source draft markdown.
+  2. `<topic_slug>_post_linkedin_ready.txt`: Pre-compiled LinkedIn-ready text processed via `scripts/md_to_linkedin.py` with full Unicode bold and `U+2800` line spacing.
+  3. Visual assets: High-resolution developer graphic (`.jpg`) or animated workflow GIF (`.gif`).
+  4. Generator script: Python script used to render the visual assets.
+- In the chat response, always output the direct-paste text block so the user can copy it straight into LinkedIn.
