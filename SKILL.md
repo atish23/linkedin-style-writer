@@ -64,9 +64,14 @@ When writing a technical post for LinkedIn, you must strictly adhere to the foll
   2. **GitHub Repository Screenshots (Default for Open-Source & Repo Posts)**:
      - Whenever introducing, launching, or referencing an open-source GitHub repository, take a clean, high-resolution screenshot of the GitHub repository's main page and README header.
      - Real GitHub UI (repo title, stars, badges, and clean markdown intro) is instantly recognized, authentic, and trusted by developers.
-  3. **Sequential Animated GIF (For Terminal Hooks & Pipelines)**:
-     - Multi-frame looping GIF (1000x1000, 150-250KB) showing step-by-step CLI execution, hook interception, and runtime results.
-- **Generation Method**: Generated programmatically using Python (Pillow) with system fonts (San Francisco, Helvetica, Arial, or Menlo monospace).
+  3. **Remotion Motion Graphics & Animated GIFs (For Workflows, Hooks & Highest Engagement)**:
+     - People on LinkedIn engage significantly higher with fluid animated motion graphics than static images.
+     - Use Remotion (React + spring physics) to create code-driven looping motion graphics:
+       - Sequenced Bento cards popping in with natural spring physics (`spring()`).
+       - Animated data packets traveling through the pipeline (Client -> Hook -> Ollama -> LLM).
+       - Live terminal typing with pulsating latency counters.
+     - Render as a 1080x1350 (4:5) or 1080x1080 looping animated GIF (`.gif`) or MP4 explainer via `npx remotion render`.
+- **Generation Methods**: Programmatically generated using Python (Pillow) for static Bento cards or Remotion (React + spring physics) for animated motion graphics and GIFs.
 
 ## 5. Output Deliverables & Folder Structure
 Whenever drafting a post, organize deliverables into a dedicated timestamped topic bundle:
