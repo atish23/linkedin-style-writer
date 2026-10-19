@@ -20,17 +20,24 @@ When writing a technical post for LinkedIn, you must strictly adhere to the foll
 - **Language Blending**: Crisp technical English, allowing conversational phrasing where it aids intuition.
 
 ## 2. Structure and Formatting Patterns
-- **Hook → Problem → Alternatives → Solution → Payoff**:
-  - **Strong hooks**: Jump straight in media res (e.g., "Someone just built...", "Most AI tools try too hard to look smart...", "I got tired of generic review prompts...").
-  - **Problem Setup**: Clearly surface a production pain point in 1-2 lines.
-  - **Alternatives**: Briefly explain why current approaches fall short.
-  - **Solution / The Core Mechanic**: Introduce the solution and break down how it works step-by-step.
+- **Ultra-Short & High-Crux (NO Long Posts on LinkedIn - STRICT)**:
+  - People on LinkedIn do not read walls of text. Keep posts ultra-short, punchy, and high-signal.
+  - Strict length cap: **75 to 130 words total (strictly 5 to 8 short lines / punchy bullets)**.
+  - Total mobile reading time must be under **20 seconds**.
+  - Canonical 4-part structure:
+    1. Line 1: Killer hook (the blunt observation or pain point).
+    2. Lines 2-3: The crux (what was built and what it replaces).
+    3. Lines 4-7: 3 to 4 punchy bullet takeaways with concrete metrics.
+    4. Line 8: Direct GitHub repo / resource link.
+- **Dual Publishing Strategy (LinkedIn Crux + Hashnode Deep-Dive)**:
+  - **LinkedIn Post**: Ultra-short teaser delivering the core crux in 20 seconds.
+  - **Hashnode / Technical Blog**: If an architecture breakdown requires multi-step code walkthroughs, benchmark tables, or long-form essays, write a separate comprehensive article on Hashnode (`output/hashnode_blogs/<slug>.md`) and link to it.
 - **Bullet-Heavy Explanations**:
   - Use clean bullet lists (`•` or emojis like `🧠`, `⚡`, `🛡️`, `🎯`) for features, workflows, and use cases.
 - **NEVER Include ASCII Box Diagrams in Post Text (STRICT)**:
   - NEVER insert ASCII flowcharts, box-and-arrow diagrams (e.g., `[ Prompt ] -> │ ▼ [ Hook ] -> [ LLM ]`), or text trees into the LinkedIn post body.
   - In LinkedIn feeds, ASCII box art breaks across mobile screen widths, suffers from variable font kerning, and looks cluttered.
-  - All architecture workflows, pipelines, and step-by-step system interactions must be rendered into the companion programmatic graphic or animated GIF instead. Keep post text clean, bullet-focused, and narrative-first.
+  - All architecture workflows, pipelines, and step-by-step system interactions must be rendered into the companion visual graphic or animated GIF instead. Keep post text clean, bullet-focused, and narrative-first.
 - **Ending & Closing Rules (No Engagement Bait - STRICT)**:
   - NEVER end posts with generic engagement-bait questions such as: "Let's discuss in the comments 👇", "What do you think? Drop a comment below", or "How are you handling X in your workflows?".
   - These lines feel like generic marketing slop and dilute technical credibility.
@@ -46,19 +53,27 @@ When writing a technical post for LinkedIn, you must strictly adhere to the foll
   - When text is pasted into LinkedIn, its sanitizer strips empty newlines and collapses paragraphs into a dense wall of text.
   - **The Solution**: Inject the invisible **Braille Pattern Blank character (`\u2800` / `⠀`)** onto every empty spacer line between paragraphs. LinkedIn recognizes `⠀` as a real character and will NEVER strip or collapse the spacing on desktop or mobile.
 
-## 4. Programmatic Visual Assets (Matte-Black Developer Theme)
-- **No Generic AI Illustrations**: NEVER generate cartoonish, glossy, or uncanny AI illustrations. Visual assets MUST look like clean, human-designed developer artifacts (Linear/Vercel aesthetic).
-- **Format Choices**:
-  1. **Developer Cheat Sheet Graphic (`.jpg`)**: 1200x1200 high-resolution square (1:1 aspect ratio), deep matte black (`#050505`), stark white headers (42px-46px bold), body bullets (20px-22px), and coordinate-drawn vector checkmarks (`✓` in `#2ecc71`) or crosses (`✕` in `#ff4d4d`).
-  2. **Sequential Animated GIF (`.gif`)**: Multi-frame looping GIF (1000x1000 or 1200x1200, 150-250KB) showing step-by-step CLI workflows, terminal hooks, or agent pipeline stages in action.
+## 4. Visual Asset Guidelines (Warm Bento Architecture & GitHub Screenshots)
+- **No Pitch-Black Terminal Dumps**: Avoid gloomy, all-black (`#050505`) code screenshots that blend into the feed and get ignored.
+- **Standard Visual Formats**:
+  1. **Warm Bento Architecture Graphic (Default for Architecture & Concepts)**:
+     - **Canvas & Aspect Ratio**: 1080x1350 (4:5 vertical portrait) to capture 30% more vertical screen real estate on mobile feeds.
+     - **Color Palette**: Warm cream paper background (`#F6F4ED` / `#FAF8F5`), crisp dark container borders (`#1A1A1A`), and soft pastel badges (`#FEF08A`, `#BFDBFE`, `#BBF7D0`, `#FED7AA`).
+     - **Layout Hierarchy**: Top hero title with colored accent keyword + 3 Bento cards (Input / Engine / Output) + 5-step horizontal pipeline cards across the bottom.
+     - **Generator Template**: Adapt `scripts/generate_bright_infographic.py`.
+  2. **GitHub Repository Screenshots (Default for Open-Source & Repo Posts)**:
+     - Whenever introducing, launching, or referencing an open-source GitHub repository, take a clean, high-resolution screenshot of the GitHub repository's main page and README header.
+     - Real GitHub UI (repo title, stars, badges, and clean markdown intro) is instantly recognized, authentic, and trusted by developers.
+  3. **Sequential Animated GIF (For Terminal Hooks & Pipelines)**:
+     - Multi-frame looping GIF (1000x1000, 150-250KB) showing step-by-step CLI execution, hook interception, and runtime results.
 - **Generation Method**: Generated programmatically using Python (Pillow) with system fonts (San Francisco, Helvetica, Arial, or Menlo monospace).
 
 ## 5. Output Deliverables & Folder Structure
 Whenever drafting a post, organize deliverables into a dedicated timestamped topic bundle:
 - **Topic Folder Path**: `./output/linkedin_posts/YYYY-MM-DD_HHMM_<topic_slug>/`
 - **Inside the Topic Folder**:
-  1. `<topic_slug>_post.md`: Canonical source draft markdown.
+  1. `<topic_slug>_post.md`: Canonical source draft markdown (under 130 words).
   2. `<topic_slug>_post_linkedin_ready.txt`: Pre-compiled LinkedIn-ready text processed via `scripts/md_to_linkedin.py` with full Unicode bold and `U+2800` line spacing.
-  3. Visual assets: High-resolution developer graphic (`.jpg`) or animated workflow GIF (`.gif`).
+  3. Visual assets: Warm bento architecture graphic (`.jpg`), GitHub repo screenshot (`.png`), or animated workflow GIF (`.gif`).
   4. Generator script: Python script used to render the visual assets.
 - In the chat response, always output the direct-paste text block so the user can copy it straight into LinkedIn.
