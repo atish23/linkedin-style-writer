@@ -112,38 +112,21 @@ Never open with passive market commentary or third-party press releases.
 3. **Knowledge-Management Storytelling**: Present patterns as practical workflows.
 4. **Career Narrative & Gratitude**: For milestone posts, be emotionally rich, people-centric, and thank leaders/peers by name.
 
-## Visual Asset Guidelines
-- **No Pitch-Black Terminal Dumps**: Avoid gloomy, all-black (`#050505`) code screenshots that blend into the feed and get ignored.
-- **Standard Visual Formats**:
-  1. **Multi-Photo Collages (Default for Events, Meetups & Milestones)**:
-     - 3 to 4 real camera photos of human faces, team members, conference auditoriums, or meetup sessions.
-     - Highest engagement driver across the entire profile.
-  2. **Warm Bento Architecture Graphic (Static Standard)**:
-     - **Canvas & Aspect Ratio**: 1080x1350 (4:5 vertical portrait) to capture 30% more vertical screen real estate on mobile feeds.
-     - **Color Palette**: Warm cream paper background (`#F6F4ED` / `#FAF8F5`), crisp dark container borders (`#1A1A1A`), and soft pastel badges (`#FEF08A`, `#BFDBFE`, `#BBF7D0`, `#FED7AA`).
-     - **Mobile-First Typography Standard (MANDATORY - ZERO SQUINTING)**:
-       - 85%+ of LinkedIn impressions are mobile feeds. If text cannot be read at arm's length on a smartphone without zooming, the graphic fails.
-       - **Strict Font Size Hierarchy (for 1080x1350 Canvas)**:
-         - Main Hero Title: **50px - 56px** bold.
-         - Card Titles: **30px - 34px** bold.
-         - Body Text & Bullets: **24px - 28px** bold minimum (NEVER use 14px - 18px text).
-         - Badges & Tags: **20px - 22px** bold.
-         - Terminal Snippets: **21px - 23px** monospace.
-     - **Low Context Density (Less Text, Bigger Impact)**:
-       - Cut paragraph explanations. Use maximum 2 to 3 punchy bullets per card (3 to 6 words each).
-       - Keep cards spacious with generous breathing room. Focus on the core visual relationship rather than cramming full documentation.
-     - **Automatic Pixel-Bounded Text Wrapping**: Use `draw_wrapped_text_auto` with `ctx.textbbox` to ensure text never overflows canvas boundaries.
-     - **Canonical Template**: Use `/Users/atishmaske/Documents/LLM WIKI/scripts/generate_context_pollution_bento.py`.
-  3. **GitHub Repository Screenshots (Default for Open-Source & Repo Posts)**:
-     - Clean, high-resolution screenshot of the GitHub repo header, star badge, and clear README introduction.
-     - Authentic, instantly recognized, and trusted by developers.
-  4. **Remotion Animated GIFs (MANDATORY DEFAULT FOR ALL POSTS)**:
-     - **Always Generate a Remotion GIF**: Every technical LinkedIn post must include an animated looping GIF rendered via Remotion in our signature style.
-     - **Persistent Architecture (Zero Blank Frames)**: All bento cards, titles, and diagrams must be 100% visible and readable from frame 0 so mobile viewers capture the full context in the first second. Never start blank or sequentially reveal empty cards.
-     - **Ambient Flow (Gentle Data Transmission)**: Focus animation on continuous signal movement (looping energy dots traveling along connectors, subtle cycling spotlight on active pipeline stages, calm steady terminal prompt). Eliminate aggressive blinking, strobe effects, or rapid cursor flashing.
-     - **Mobile-Snug Dimensions**: Render as a compact card (800x540 to 800x600) with zero dead vertical space, keeping the file size lightweight (< 1MB) for instant mobile loading.
-     - Save both the static `.jpg` and the animated `.gif` in the post's dedicated bundle directory.
-  5. **Video Posts Caution**: Post text must be 100% self-sufficient. Assume mobile users will not unmute or play the video.
+## Visual Asset Guidelines (GIF-ONLY STANDARD)
+- **GIF-Only Default Rule (MANDATORY)**:
+  - **ALWAYS generate ONLY an animated Remotion GIF (`.gif`) for LinkedIn posts.**
+  - **NEVER waste time generating static images (`.jpg` / `.png`) unless explicitly asked by the user.**
+  - The animated GIF in our Warm Bento style is the exclusive default visual format.
+- **Remotion Animated GIF Specifications (The Signature Standard)**:
+  - **Tooling**: Built and rendered using Remotion (`npx remotion render`).
+  - **Persistent Architecture (Zero Blank Frames)**: All bento cards, titles, and diagrams must be 100% visible and readable from frame 0 so mobile viewers capture the full context in the first second. Never start blank or sequentially reveal empty cards.
+  - **Ambient Flow (Gentle Data Transmission)**: Focus animation on continuous signal movement (looping energy dots traveling along connectors, subtle cycling spotlight on active pipeline stages, calm steady terminal prompt). Eliminate aggressive blinking, strobe effects, or rapid cursor flashing.
+  - **Mobile-Snug Dimensions**: Render as a compact card (800x540) with zero dead vertical whitespace, keeping the file size ultra-lightweight (< 500 KB) for instant mobile loading.
+  - **Color Palette**: Warm cream paper background (`#F6F4ED`), crisp dark borders (`#1A1A1A`), and soft pastel status badges (`#FEF08A`, `#BFDBFE`, `#DCFCE7`, `#FED7AA`).
+- **Exceptions (Only When Explicitly Requested)**:
+  1. **Multi-Photo Collages**: Only for in-person events, meetups, or career milestones where the user provides real photos.
+  2. **GitHub Repository Screenshots**: Only when the user specifically requests a repo screenshot instead of a GIF.
+  3. **Static Infographic Images**: NEVER generate unless the user explicitly asks for an image (`.jpg`/`.png`).
 
 ## Persistence and Output Deliverables (CRITICAL)
 - **Dedicated Topic Bundle Folder Structure with Date & Time (MANDATORY)**:
@@ -154,8 +137,8 @@ Never open with passive market commentary or third-party press releases.
   - Inside that topic folder, keep everything related to the post self-contained:
     1. `<topic_slug>_post.md` (or `post.md`): Canonical markdown draft.
     2. `<topic_slug>_post_linkedin_ready.txt`: Direct-paste LinkedIn text generated via `scripts/md_to_linkedin.py`.
-    3. Media assets: Multi-photo collages (`.jpg`), Warm Bento infographics (`.jpg`), animated GIFs (`.gif`), or videos (`.mp4`).
-    4. Generator scripts: Any custom Python script used to render the post's visual assets.
+    3. Media asset: Remotion animated GIF (`<topic_slug>_animated.gif`). No static image unless asked.
+    4. Remotion component: React component source in `remotion_rea/src/`.
 - **Save Dual Post Formats**:
   1. Save the canonical source draft as a markdown file (`.md`) inside the post's dedicated timestamped topic folder.
   2. Automatically generate and save the **direct-paste LinkedIn version** (`<filename>_linkedin_ready.txt`) inside the same topic folder by running:
