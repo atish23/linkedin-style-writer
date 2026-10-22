@@ -135,16 +135,20 @@ Never open with passive market commentary or third-party press releases.
     `/Users/atishmaske/Documents/LLM WIKI/output/linkedin_posts/YYYY-MM-DD_HHMM_<topic_slug>/`
     (Example: `2026-10-18_1604_local_decision_models`, `2026-10-17_1311_linkedin_style_writer`)
   - Inside that topic folder, keep everything related to the post self-contained:
-    1. `<topic_slug>_post.md` (or `post.md`): Canonical markdown draft.
-    2. `<topic_slug>_post_linkedin_ready.txt`: Direct-paste LinkedIn text generated via `scripts/md_to_linkedin.py`.
-    3. Media asset: Remotion animated GIF (`<topic_slug>_animated.gif`). No static image unless asked.
-    4. Remotion component: React component source in `remotion_rea/src/`.
-- **Save Dual Post Formats**:
-  1. Save the canonical source draft as a markdown file (`.md`) inside the post's dedicated timestamped topic folder.
-  2. Automatically generate and save the **direct-paste LinkedIn version** (`<filename>_linkedin_ready.txt`) inside the same topic folder by running:
-     `python3 "/Users/atishmaske/Documents/LLM WIKI/scripts/md_to_linkedin.py" "<path_to_md>" "<path_to_txt>"`
-     This guarantees the user has a 1-click copy-paste text file with full Unicode bold and `U+2800` line-break protection.
-  3. In the chat response, ALWAYS output the LinkedIn-ready direct-paste text block so the user can copy it immediately.
+    1. `<topic_slug>_post_linkedin_ready.txt`: Direct-paste LinkedIn text compiled with Mathematical Unicode Bold and `U+2800` line defense.
+    2. Media asset: Remotion animated GIF (`<topic_slug>_animated.gif`) when media is needed. No static images unless asked.
+    3. Remotion component: React component source in `remotion_rea/src/` (when GIF is rendered).
+- **No Markdown (.md) Post Files (MANDATORY)**:
+  - NEVER generate raw `.md` post files. Markdown syntax (raw asterisks and backticks) does not work on LinkedIn and only creates cluttered, unusable files.
+  - ONLY generate and save the **direct-paste LinkedIn text file** (`<topic_slug>_post_linkedin_ready.txt`) pre-compiled with Mathematical Unicode Bold and `U+2800` Braille blank character line spacing defense.
+  - In the chat response, ALWAYS output the LinkedIn-ready direct-paste text block so the user can copy it immediately.
+- **GitOps Staging to n8n-workflows Repository (Scheduled Publishing Queue)**:
+  - After generating `<topic_slug>_post_linkedin_ready.txt` and rendering `<topic_slug>_animated.gif`, stage the post bundle directly into the `n8n-workflows` Git repository by running:
+    `python3 "/Users/atishmaske/Documents/LLM WIKI/scripts/sync_post_to_git.py" --title "<Title>" --text-file "<path_to_txt>" --media-file "<path_to_gif>"`
+  - **Schedule Rule (STRICT)**: The publication date is automatically set to **exactly 7 days from the current date (same day next week at 09:00 AM IST)**.
+  - The script creates `/Users/atishmaske/Documents/n8n-workflows/content/linkedin/YYYY-MM-DD_HHMM_<slug>/` containing `post.txt`, `media.gif`, and `metadata.json` with `status: "pending"`, and automatically commits to the local repository.
+  - Cloud n8n reads from this repository, ingests the binary media and text directly, and publishes on schedule without relying on Notion.
+  - In your chat summary, confirm both the local LLM WIKI bundle deliverables and the GitOps staging commit.
 - **Personal Persona Blueprint & Prompt Telemetry**: Cross-reference `/Users/atishmaske/Documents/LLM WIKI/memory/user_persona.md`, `/Users/atishmaske/Documents/LLM WIKI/memory/user_prompts.jsonl`, `/Users/atishmaske/Documents/LLM WIKI/memory/persona_telemetry.json`, and `/Users/atishmaske/Documents/LLM WIKI/wiki/concepts/atish-maske-writing-voice.md` to guarantee alignment with Atish's syntax, cognitive pacing, and anti-slop rules.
 
 Follow these rules strictly whenever tasked with drafting, editing, or reviewing a LinkedIn post for the user.
